@@ -24,6 +24,12 @@ Hit EPA(Triangle& semple, const std::vector<Vector2D>& object1, const std::vecto
 	{
 		Vector2D dir = semple.point[i] - semple.point[(i+1)%3];
 		line_set[i].double_distance = std::abs(Math::Normalize(dir.GetNormal()).dot(semple.point[i]));
+		if (line_set[i].double_distance == 0.f)
+		{
+			hit.depth = 1;
+			hit.direct = Math::Normalize(dir.GetNormal());
+			return hit;
+		}
 	}
 
 	for (;;)
