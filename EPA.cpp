@@ -1,7 +1,14 @@
 #include "base.hpp"
 #include "cmath"
 
-Vector2D GetUnFaceOriginVector(const Vector2D& a, const Vector2D& b);//获得线段背离原点的向量
+Vector2D GetUnFaceOriginVector(const Vector2D& a, const Vector2D& b)//获得线段背离原点的向量
+{
+	Vector2D delta = a - b;
+	Vector2D nor =(Vector2D(delta.Y, -delta.X));
+	if (nor.dot(-a) < 0)
+		return nor;
+	return -nor;
+}
 
 struct Line
 {
@@ -60,13 +67,3 @@ Hit EPA(Triangle& semple, const std::vector<Vector2D>& object1, const std::vecto
 		line_set[line_set.size() - 1].double_distance = std::abs(Math::Normalize(dir.GetNormal()).dot(line_set[line_set.size() - 1].a));
 	}
 }
-
-Vector2D GetUnFaceOriginVector(const Vector2D& a, const Vector2D& b)
-{
-	Vector2D delta = a - b;
-	Vector2D nor =(Vector2D(delta.Y, -delta.X));
-	if (nor.dot(-a) < 0)
-		return nor;
-	return -nor;
-}
-
