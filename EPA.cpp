@@ -61,3 +61,12 @@ Hit EPA(Triangle& semple, const std::vector<Vector2D>& object1, const std::vecto
 	}
 }
 
+Vector2D GetUnFaceOriginVector(const Vector2D& a, const Vector2D& b)
+{
+	Vector2D delta = a - b;
+	Vector2D nor =(Vector2D(delta.Y, -delta.X));
+	if (nor.dot(-a) < 0)
+		return nor;
+	return -nor;
+}
+
